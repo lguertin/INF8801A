@@ -21,9 +21,32 @@ classdef descZernike
             
             w = descZernike.resolution;
             
-            % TODO Question 2 :
-            polynom = zeros(w,w);
+            % TODO Question 2 :      
+            x = linspace(-1, 1, w);
+            y = linspace(-1, 1, w);
             
+            [X, Y] = meshgrid(x,y);
+            
+            r = sqrt(X.^2 + Y.^2);
+            theta = atan2(Y,X);
+            
+            r(r>1)=0;
+
+            R = zeros(w,w);
+                           
+            for k = 0 : (m-abs(n))/2
+                R = R + (-1).^k * (factorial(m-k)) / (factorial(k) * factorial((m+abs(n))/2 - k) * factorial((m-abs(n))/2 - k)) * r.^(m-2*k);
+            end
+            
+            disp(1)
+            disp(2)
+            disp(3)
+            disp(R)
+            
+            R(r>1) = 0;
+         
+            polynom = R * exp(1j*n*theta);
+            keyboard
         end
         
         % calcule tout un set de polynômes de Zernike
