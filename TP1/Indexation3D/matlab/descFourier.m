@@ -45,18 +45,21 @@ classdef descFourier
 
             [number_of_points, number_of_dimensions] = size(contour);
             
-            Zk = 0;
+%             Echantillonner par 128
             
-            for j = 1:number_of_points
-                z = complex(contour(j, 1), contour(j, 2));
-                i = complex(0, 1);
-                
-                Zk += 
-                
-            end++
+%             Zk = 0;
+%             
+%             for j = 1:number_of_points
+%                 z = complex(contour(j, 1), contour(j, 2));
+%                 i = complex(0, 1);
+%                 
+%                 Zk += 
+%                 
+%             end
            
             
             % TODO Question 1 :
+%             Y = fft(X)
             dst.values = zeros(1,descFourier.descSize);
             
          end
