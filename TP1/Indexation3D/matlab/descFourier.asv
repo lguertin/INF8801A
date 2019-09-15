@@ -15,7 +15,7 @@ classdef descFourier
     methods
          % constructeur (à  partir d'une image blanche sur noire)
          function dst = descFourier(shape)
-            % TODO Question 1 :
+             
             % Vous pouvez utiliser les fonctions matlab :
             % bwtraceboundary, interp1, etc..
             
@@ -39,31 +39,33 @@ classdef descFourier
             end
             
             contour = bwtraceboundary(shape, center, 'N');
-            [number_of_points, number_of_dimensions] = size(contour);
-            
-            v = zeros(1, number_of_points);
-            for j = 1:number_of_points
-                v(j) = complex(contour(j, 1), contour(j, 2));                
-            end
-           
-            x = 1:number_of_points;
-            
-            xq = linspace(1, number_of_points, descFourier.nbPoints);
-            
-            contour_sampled = interp1(x, v, xq);
-            
+%             figure, plot(contour(:,2),contour(:,1),'g','LineWidth',2)
+%             keyboard
             
 
-%             Pour afficher les contours des objets avec les points echantillones
-%             figure, plot(contour_sampled(:,2),contour_sampled(:,1),'g','LineWidth',2)
-            fourrier_descriptors = fft(contour_sampled);
+            [number_of_points, number_of_dimensions] = size(contour);
             
-            fourrier_descriptors
+%             x = 1:number_of_points;
+%             v = 
             
+%             Echantillonner par 128
+            
+%           Transformée de fourrier
+            % fft(X)
+%             Zk = 0;
+
+            for j = 1:number_of_points
+                z = complex(contour(j, 1), contour(j, 2));
+                i = complex(0, 1);
                 
-            dst.values = contour_sampled;
-              
-%               Effectuer les changements pour les invariances
+                Zk += 
+                
+            end
+           
+            
+            % TODO Question 1 :
+%             Y = fft(X)
+            dst.values = zeros(1,descFourier.descSize);
             
          end
          
