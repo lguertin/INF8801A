@@ -58,12 +58,16 @@ classdef descFourier
 %             figure, plot(contour_sampled(:,2),contour_sampled(:,1),'g','LineWidth',2)
             fourrier_descriptors = fft(contour_sampled);
             
-            fourrier_descriptors
+            fourrier_descriptors = abs(fourrier_descriptors);
+            
+            fourrier_descriptors(1) = [];
+            
+            fourrier_descriptors = fourrier_descriptors ./ fourrier_descriptors(1);
+            
+            
             
                 
-            dst.values = contour_sampled;
-              
-%               Effectuer les changements pour les invariances
+            dst.values = fourrier_descriptors;
             
          end
          
