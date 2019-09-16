@@ -38,15 +38,9 @@ classdef descZernike
                 R = R + (-1).^k * (factorial(m-k)) / (factorial(k) * factorial((m+abs(n))/2 - k) * factorial((m-abs(n))/2 - k)) * r.^(m-2*k);
             end
             
-            disp(1)
-            disp(2)
-            disp(3)
-            disp(R)
-            
-            R(r>1) = 0;
+            R(R>1)=0;
          
-            polynom = R * exp(1j*n*theta);
-            keyboard
+            polynom = R .* exp(1j*n.*theta);
         end
         
         % calcule tout un set de polynômes de Zernike
@@ -100,6 +94,15 @@ classdef descZernike
              
              % TODO Question 2 :
              dst.values = zeros(1,descZernike.descSize);
+
+             s = shape;
+             s(s>0) = 1;
+                          
+             for order = 1:descZernike.descSize
+                 Mnm = sum(descZernike.polynoms(:,:,order) .* s);
+                 Mnm = Mnm / (descZernike.resolution * descZernike.resolution);
+                 dst.values(order) = Mnm;
+             end
          end
          
         % distance entre deux descripteurs
