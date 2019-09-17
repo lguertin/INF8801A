@@ -51,11 +51,10 @@ classdef descFourier
             xq = linspace(1, number_of_points, descFourier.nbPoints);
             
             contour_sampled = interp1(x, v, xq);
-            
-            
-
+                     
 %             Pour afficher les contours des objets avec les points echantillones
 %             figure, plot(contour_sampled(:,2),contour_sampled(:,1),'g','LineWidth',2)
+
             fourrier_descriptors = fft(contour_sampled);
             
             fourrier_descriptors = abs(fourrier_descriptors);
@@ -64,10 +63,7 @@ classdef descFourier
             
             fourrier_descriptors = fourrier_descriptors ./ fourrier_descriptors(1);
             
-            
-            
-                
-            dst.values = fourrier_descriptors;
+            dst.values = fourrier_descriptors(1:descFourier.descSize);
             
          end
          
