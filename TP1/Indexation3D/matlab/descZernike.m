@@ -92,17 +92,16 @@ classdef descZernike
          % constructeur (à partir d'une image blanche sur noire)
          function dst = descZernike(shape)
              
-             % TODO Question 2 :
-             dst.values = zeros(1,descZernike.descSize);
+            % TODO Question 2 :
+            dst.values = zeros(1,descZernike.descSize);
+            
+            shape = descZernike.rescale(shape);
 
-             s = shape;
-             s(s>0) = 1;
-                          
-             for order = 1:descZernike.descSize
-                 Mnm = sum(descZernike.polynoms(:,:,order) .* s);
-                 Mnm = Mnm / (descZernike.resolution * descZernike.resolution);
-                 dst.values(order) = Mnm;
-             end
+            for order = 1:descZernike.descSize
+                Mnm = sum(sum(descZernike.polynoms(:,:,order) .* shape));
+                Mnm = Mnm / (descZernike.resolution * descZernike.resolution);
+                dst.values(order) = abs(Mnm);
+            end
          end
          
         % distance entre deux descripteurs
