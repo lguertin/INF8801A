@@ -114,9 +114,17 @@ classdef descGist
            
            % réponses à chaque filtres de Gabor
            dst.values = zeros( descGist.gridSize, descGist.gridSize, descGist.nbScales, descGist.nbOri);
-           % TODO : Question 1
-           % ...
            
+           % TODO : Question 1
+           
+           filters = descGist.getGabors();
+           for y = 1:descGist.nbOri     
+               for x = 1:descGist.nbScales
+                filtered_src = imfilter(src, filters(:, :, x, y), 'replicate');
+                filtered_src = abs(filtered_src);
+                dst.values(:, :, x, y) = imresize(filtered_src, [4 4], 'bilinear');
+               end
+           end
            
        end
        
