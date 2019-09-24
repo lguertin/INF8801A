@@ -38,18 +38,15 @@ classdef descGist
            
         filters = zeros( descGist.filterSize, descGist.filterSize, descGist.nbScales, descGist.nbOri );
         % TODO : Question 1
-        % ...
+        
         pas = 180 / 6;
         lda = 32; % longueur d'onde (en pixels)
         sigmaX = 16; % gaussienne dans le sens de l'onde (px)
         sigmaY = 32; % gaussienne perpendiculaire à l'onde (px)
-        indice = 1
         for n = 0:5
-            filters(indice) = descGist.getGabor(deg2rad(n * pas), lda, sigmaX, sigmaY);
-            indice = indice + 1;
+            filters(:, :, 1, n + 1) = descGist.getGabor(deg2rad(n * pas), lda, sigmaX, sigmaY);
             for k = 1:4
-                filters(indice) = descGist.getGabor(deg2rad(n * pas), lda / (k * 2), sigmaX / (k * 2), sigmaY / (k * 2));
-                indice = indice + 1;
+                filters(:, :, k + 1, n + 1) = descGist.getGabor(deg2rad(n * pas), lda / (k * 2), sigmaX / (k * 2), sigmaY / (k * 2));
             end
         end
        end
