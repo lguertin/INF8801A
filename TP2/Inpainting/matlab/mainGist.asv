@@ -1,4 +1,4 @@
-close all
+close all;
 clear all
 
 %% test sur une image
@@ -9,6 +9,20 @@ figure; imshow(src); title('Image de test');
 
 % calcul du descripteur
 desc = descGist(src);
+
+% pas = 180 / 6;
+% lda = 32; % longueur d'onde (en pixels)
+% sigmaX = 16; % gaussienne dans le sens de l'onde (px)
+% sigmaY = 32; % gaussienne perpendiculaire à l'onde (px)
+% 
+% for n = 0:5
+%     filtre = desc.getGabor(deg2rad(n * pas), lda, sigmaX, sigmaY);
+%     figure; imagesc(filtre); colormap('gray');
+%     for k = 1:4
+%         filtre = desc.getGabor(deg2rad(n * pas), lda / (k * 2), sigmaX / (k * 2), sigmaY / (k * 2));
+%         figure; imagesc(filtre); colormap('gray'); title(['Filtre ' num2str(n)]);
+%     end
+% end
 
 % affichage des valeurs du descripteur
 figure; image(64*desc.display()); title('descripteur GIST');

@@ -120,9 +120,8 @@ classdef descGist
            filters = descGist.getGabors();
            for y = 1:descGist.nbOri     
                for x = 1:descGist.nbScales
-                filtered_src = imfilter(src, filters(:, :, x, y), 'replicate');
-                filtered_src = abs(filtered_src);
-                dst.values(:, :, x, y) = imresize(filtered_src, [4 4], 'bilinear');
+                
+                dst.values(:, :, x, y) = imfilter(src, filters(:, :, x, y), 'replicate');
                end
            end
            
