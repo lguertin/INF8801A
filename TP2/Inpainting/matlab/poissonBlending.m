@@ -11,7 +11,26 @@ function [ dst ] = poissonBlending( src, target, alpha )
     % TODO Question 2 :
     alpha = double(repmat(alpha,[1,1,3]));
     alpha = alpha./max(alpha(:));
-    dst = double(src) .* alpha + double(target) .* (1-alpha);
+    
+    alpha(alpha > 0.3) = 1;
+    alpha(alpha <= 0.3) = 0;
+    
+%     dst = double(src) .* alpha + double(target) .* (1-alpha);
+%     dst = uint8(dst);
+
+    dst = double(src);
+    target = double(target);
+    
+    laplacien = imfilter(target, [0,-1/4,0;-1/4,1,-1/4;0,-1/4,0], 'replicate');
+    
+    for k = 0 : 10000
+        sumfq = imfilter(dst, [0,1/4,0;1/4,0,1/4;0,1/4,0], 'replicate');
+
+        dst = sumfq + laplacien;
+        
+        dst(alpha==1) = src(alpha==1);
+    end
+    
     dst = uint8(dst);
 end
 
