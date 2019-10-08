@@ -37,7 +37,7 @@ sigma_r = mean(imgradient(rgb2gray(src)), 'all');
 
 % Bilateral
 noise_bi = rgb2hsv(src);
-filtered = bilateralFilter(noise_bi(:,:,3), [], 0, 1, 16, 0.2);
+filtered = bilateralFilter(noise_bi(:,:,3), [], 0, 1, sigma_s, sigma_r);
 norm_src_bi = noise_bi(:,:,3) - filtered;
 
 norm_src_bi = norm_src_bi - min(norm_src_bi(:));
@@ -50,7 +50,7 @@ imshow(hsv2rgb(rec)); title('Image filtr�e avec passe haut Bilateral');
 
 % Gaussien
 noise_ga = rgb2hsv(src);
-filtered = imgaussfilt(src(:,:,3), 30);
+filtered = imgaussfilt(src(:,:,3), sigma_s);
 norm_src_ga = noise_ga(:,:,3) - filtered;
 
 norm_src_ga = norm_src_ga - min(norm_src_ga(:));
