@@ -13,7 +13,10 @@ imshow(noise(:,:,3)); title('Image originale (bruit�e)');
 
 
 % TODO Question 1 :
-filtered = bilateralFilter(noise(:,:,3), [], 0, 1, 12, 0.2);
+% filtered = medfilt2(noise(:,:,3), [ 5 5 ], 'symmetric');
+% data, edge, edgeMin, edgeMax, sigmaSpatial, sigmaRange, ...
+%     samplingSpatial, samplingRange
+filtered = bilateralFilter(noise(:,:,3), [], , 100, 12, 0.2);
 figure;
 imshow(filtered); title('Image filtr�e');
 
