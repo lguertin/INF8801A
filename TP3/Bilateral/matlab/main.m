@@ -34,7 +34,7 @@ figure; imshow(src); title('Réduction uniforme linéaire')
 % Filtrage avec filtres Gaussien et bilatéral (Question 2)
 noise_bi = rgb2hsv(src);
 filtered = bilateralFilter(noise_bi(:,:,3), [], 0, 1, 16, 0.2);
-norm_src_bi = noise_bi(:,:,3)-filtered;
+norm_src_bi = noise_bi(:,:,3) - filtered;
 
 norm_src_bi = norm_src_bi - min(norm_src_bi(:));
 norm_src_bi = norm_src_bi./max(norm_src_bi(:));
@@ -43,3 +43,17 @@ rec = noise_bi;
 rec(:,:,3) = norm_src_bi;
 figure;
 imshow(hsv2rgb(rec)); title('Image filtr�e avec passe haut Bilateral');
+
+% Gaussien
+
+noise_ga = rgb2hsv(src);
+filtered = imgaussfilt(src(:,:,3), 30);
+norm_src_ga = noise_ga(:,:,3) - filtered;
+
+norm_src_ga = norm_src_ga - min(norm_src_ga(:));
+norm_src_ga = norm_src_ga./max(norm_src_ga(:));
+
+ga = noise_ga;
+ga(:,:,3) = norm_src_ga;
+figure;
+imshow(hsv2rgb(ga)); title('Image filtr�e avec passe haut Gaussien');
