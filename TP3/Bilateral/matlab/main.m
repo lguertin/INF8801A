@@ -33,7 +33,7 @@ figure; imshow(src); title('Réduction uniforme linéaire')
 
 % Estimation des parametres
 sigma_s = sqrt(power(size(src, 1), 2) + power(size(src, 2), 2)) * 0.02;
-sigma_r = mean(imgradient(rgb2gray(src)), 'all');
+sigma_r = mean(mean(imgradient(rgb2gray(src))));
 
 % Bilateral
 noise_bi = rgb2hsv(src);
