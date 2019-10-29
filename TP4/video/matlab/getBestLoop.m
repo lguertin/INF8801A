@@ -4,10 +4,7 @@ function [ startFrame, endFrame ] = getBestLoop( src, minLength )
 %   src correspond à une tableau 4D des pixels de la vidéo (w,h,col,frames)
 
     % TODO : Question 1
-%     startFrame = 1;
-%     endFrame = size(src,4);
     src = double(src)/255;
-%     d = similarity(src(:,:,:,1), src(:,:,:,2), minLength);
     dist_matx = zeros(size(src,4));
     for frame = 1:size(src,4)
         for frame_compared = 1:size(src,4)
