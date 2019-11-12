@@ -35,23 +35,15 @@ function dst = shrinkH( src, newWidth )
     difference_of_width = size(src, 2) - newWidth;
     
     for w = 1:difference_of_width
-        temp = ones(size(dst, 1), size(dst, 2) - 1);
+        temp = ones(size(dst, 1), size(dst, 2) - 1, size(dst, 3));
         energy = getEnergy( dst );
         costs = pathsCost( energy );
         seam = getSeam(costs);
-        for i = 1:size(seam) % Devrait etre egale a 256
-            index_largeur = 1;
-            for pixel_in_line = 1:size(dst, 2)
-                if pixel_in_line ~= seam(i)
-                    temp = dst(i, index_largeur);
-                end
-                index_largeur = index_largeur + 1;
-            end
+        for i = 1:size(dst, 1)
+            temp(i, :, :) = [dst(i, 1:seam(i) - 1, :), dst(i, seam(i) + 1:end, :)];
         end
         dst = temp;
     end
-    % Verifier la width de l'image finale (ajuster le for difference of
-    % width en fonction
 end
 
 % Duplique les pixels de seams verticales

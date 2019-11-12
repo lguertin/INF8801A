@@ -23,7 +23,7 @@ title('Énergie cumulée pour atteindre le haut');
 %% Meilleure seam
 seam = getSeam(costs);
 seamViz = src;
-for y = 1:size(src,1), seamViz(y,seam(y),:) = [1,0,0]; end;
+for y = 1:size(src,1), seamViz(y,seam(y),:) = [1,0,0]; end
 figure; imshow(seamViz); title('Meilleure seam');
 
 %% Redimensionnement avec le seam carving
