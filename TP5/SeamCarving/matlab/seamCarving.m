@@ -53,12 +53,19 @@ function dst = enlargeH( src, newWidth )
         costs = pathsCost(energy);
         seam = getSeam(costs);
         
+        temp_dst = zeros(size(dst, 1), size(dst, 2) + 1, size(dst, 3));
+        temp_energy = zeros(size(energy, 1), size(energy, 2) + 1);
+        
         for i = 1:size(seam,1)
-            dst(i, :) = [dst(i, 1:seam(i)), dst(i, seam(i):end)];
-            energy(i, :) = [energy(i, 1:seam(i)), energy(i, seam(i):end)];
-            energy(i, seam(i)) = energy(i, seam(i)) * enery_mul_factor;
-            energy(i, seam(i) + 1) = energy(i, seam(i) + 1) * enery_mul_factor;
-        end       
+            temp_dst(i,:,:) = [dst(i, 1:seam(i, :), :), dst(i, seam(i):end, :)];
+            
+            temp_energy(i, :) = [energy(i, 1:seam(i)), energy(i, seam(i):end)];
+            temp_energy(i, seam(i)) = temp_energy(i, seam(i)) * enery_mul_factor;
+            temp_energy(i, seam(i) + 1) = temp_energy(i, seam(i) + 1) * enery_mul_factor;
+        end      
+        
+        dst = temp_dst;
+        energy = temp_energy;
     end    
     
 end
