@@ -5,6 +5,6 @@ function [ energy ] = getEnergy( img )
 %   La fonction doit pouvoir fonctionner avec un nombre indéfini de canaux !
 
 	% TODO : Question 1
-    energy = ones(size(img,1),size(img,2));
+    energy = imgradient(rgb2gray(img));
 end
 
