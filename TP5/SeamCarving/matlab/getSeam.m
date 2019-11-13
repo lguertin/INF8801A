@@ -8,7 +8,7 @@ function [ seam ] = getSeam( costs )
     
     % Find the minimum index of the costs matrix for the start of the
     % algorithm
-    idx = find(costs(h) == min(costs(h)));
+    idx = find(costs(h, :) == min(costs(h, :)));
     seam(h) = idx;
     
     i = h - 1;
@@ -21,11 +21,11 @@ function [ seam ] = getSeam( costs )
         
         indexes(2) = costs(i, idx);
         
-        if idx < h
+        if idx < size(costs, 2)
             indexes(3) = costs(i, idx + 1);
         end
         
-        idx = idx - 1 + find(indexes == min(indexes));
+        idx = idx - 2 + find(indexes == min(indexes));
         
         seam(i) = idx;
         

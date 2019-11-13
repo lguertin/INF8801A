@@ -6,11 +6,13 @@ function [ costs ] = pathsCost( energy )
     % TODO : Question 2
     costs = zeros(size(energy));
     
-    costs(1) = energy(1);
+    energy_size = size(energy);
     
-    for i = 2:size(energy(1))
-        for j = 2:size(energy(2))
-            temp = zeros(3);
+    costs(1, :) = energy(1, :);
+    
+    for i = 2:energy_size(1)
+        for j = 1:energy_size(2)
+            temp = zeros(3,1);
             
             if i-1 > 0
                 if j-1 > 0
@@ -19,14 +21,14 @@ function [ costs ] = pathsCost( energy )
                 
                 temp(2) = costs(i-1, j);
                 
-                if j+1 < size(energy(2))
+                if j+1 < energy_size(2)
                     temp(3) = costs(i-1, j+1);
                 end
             end
             
             temp(temp==0) = Inf;
             
-            costs(i, j) = e(i,j) + min(temp);
+            costs(i, j) = energy(i,j) + min(temp);
         end
     end
 
