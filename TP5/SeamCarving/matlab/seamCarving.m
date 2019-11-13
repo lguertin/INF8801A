@@ -57,7 +57,7 @@ function dst = enlargeH( src, newWidth )
     
     energy = getEnergy(dst);
     
-    enery_mul_factor = 1.1;
+    enery_mul_factor = 1.6;
     
     for w = 1:difference_of_width
         
