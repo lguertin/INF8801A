@@ -31,8 +31,19 @@ end
 function dst = shrinkH( src, newWidth )
 
     % TODO : Question 3
-    dst = imresize( src, [ size(src,1), newWidth ]);
+    dst = src;
+    difference_of_width = size(src, 2) - newWidth;
     
+    for w = 1:difference_of_width
+        temp = ones(size(dst, 1), size(dst, 2) - 1, size(dst, 3));
+        energy = getEnergy( dst );
+        costs = pathsCost( energy );
+        seam = getSeam(costs);
+        for i = 1:size(dst, 1)
+            temp(i, :, :) = [dst(i, 1:seam(i) - 1, :), dst(i, seam(i) + 1:end, :)];
+        end
+        dst = temp;
+    end
 end
 
 % Duplique les pixels de seams verticales
